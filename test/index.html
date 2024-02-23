@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>effofexx's ZerpCraft Build Viewer</title>
+	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+	<style>
+		model-viewer{
+			width: 100vw;
+			height:	100vh;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+
+	<model-viewer bounds="tight" enable-pan src="https://raw.githubusercontent.com/effofexx/effofexx.github.io/main/models/LFGO_ZerpCraft_Gallery.glb" camera-controls poster="poster.webp" shadow-intensity="1" environment-image="legacy" exposure="0.92" camera-orbit="55.5deg 77.52deg auto">
+
+		<div class="slider">
+			<div class="slides">
+			  <button class="slide selected" onclick="switchSrc(this, '055')" style="background-image: url('https://raw.githubusercontent.com/effofexx/effofexx.github.io/main/models/LFGO_ZerpCraft_Gallery.glb');">
+			</button></div>
+		  </div>
+
+	</model-viewer>
+
+	<script type="module">
+		const modelViewer = document.querySelector("model-viewer");
+	  
+		window.switchSrc = (element, name) => {
+		  const base = "https://raw.githubusercontent.com/effofexx/effofexx.github.io/main/models/" + name;
+		  modelViewer.src = base + '.glb';
+		  modelViewer.poster = base + '.png';
+		  const slides = document.querySelectorAll(".slide");
+		  slides.forEach((element) => {element.classList.remove("selected");});
+		  element.classList.add("selected");
+		};
+	  
+		document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+		  // Keep slider interactions from affecting the XR scene.
+		  ev.preventDefault();
+		});
+	</script>
+
+<style>
+	/* This keeps child nodes hidden while the element loads */
+	:not(:defined) > * {
+	  display: none;
+	}
+  
+	model-viewer {
+	  background-color: #eee;
+	  overflow-x: hidden;
+	  --poster-color: #eee;
+	}
+  
+	@keyframes circle {
+	  from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+	  to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+	}
+  
+	@keyframes elongate {
+	  from { transform: translateX(100px); }
+	  to   { transform: translateX(-100px); }
+	}
+  
+	.slider {
+	  width: 100%;
+	  text-align: center;
+	  overflow: hidden;
+	  position: absolute;
+	  bottom: 16px;
+	}
+  
+	.slides {
+	  display: flex;
+	  overflow-x: auto;
+	  scroll-snap-type: x mandatory;
+	  scroll-behavior: smooth;
+	  -webkit-overflow-scrolling: touch;
+	}
+  
+	.slide {
+	  scroll-snap-align: start;
+	  flex-shrink: 0;
+	  width: 100px;
+	  height: 100px;
+	  background-size: contain;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	  background-color: #fff;
+	  margin-right: 10px;
+	  border-radius: 10px;
+	  border: none;
+	  display: flex;
+	}
+  
+	.slide.selected {
+	  border: 2px solid #4285f4;
+	}
+  
+	.slide:focus {
+	  outline: none;
+	}
+  
+	.slide:focus-visible {
+	  outline: 1px solid #4285f4;
+	}
+  
+  </style>
+
+
+</body>
+</html>
